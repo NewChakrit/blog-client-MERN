@@ -2,14 +2,22 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 import axios from "axios";
 import Swal from "sweetalert2";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const Form = () => {
   const [state, setState] = useState({ title: "", content: "", author: "" });
 
-  const { title, content, author } = state;
+  const { title, author } = state;
+
+  const [content, setContent] = useState("");
 
   const inputValue = (name) => (e) => {
     setState({ ...state, [name]: e.target.value });
+  };
+
+  const submitContent = (e) => {
+    setContent(e);
   };
 
   const submitForm = (e) => {
@@ -26,7 +34,8 @@ const Form = () => {
           "Submit the information successfully.",
           "success"
         );
-        setState({ ...setState, title: "", content: "", author: "" });
+        setState({ ...setState, title: "", author: "" });
+        setContent("");
       })
       .catch((err) => {
         Swal.fire({
@@ -53,10 +62,13 @@ const Form = () => {
         </div>
         <div className="form-group">
           <label>Content</label>
-          <textarea
-            className="form-control"
+          <ReactQuill
             value={content}
-            onChange={inputValue("content")}
+            theme="snow"
+            className="pb-5 mb-3"
+            placeholder="Write your blog content."
+            onChange={submitContent}
+            style={{ border: "2px solid #999", borderRadius: "10px" }}
           />
         </div>
         <div className="form-group">
