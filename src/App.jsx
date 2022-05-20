@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import parse from "html-react-parser";
 
 function App() {
   const [blogs, setBlogs] = useState([]);
@@ -57,7 +58,7 @@ function App() {
                 <h2>{blogs.title}</h2>
               </Link>
               <br />
-              <p>{blogs.content.substring(0, 180)} . . . </p>
+              <p>{parse(blogs.content.substring(0, 180))} . . . </p>
               <p className="text-muted">
                 Author :{" "}
                 <i>
