@@ -49,10 +49,14 @@ const Form = () => {
   return (
     <div className="container p-5">
       <Navbar />
+      <br />
       <h1>Write Blog</h1>
       <form onSubmit={submitForm}>
+        <br />
         <div className="form-group">
-          <label>Blog Name</label>
+          <label className="mb-3">
+            <h5>Blog Name</h5>
+          </label>
           <input
             type="text"
             className="form-control"
@@ -60,8 +64,11 @@ const Form = () => {
             onChange={inputValue("title")}
           />
         </div>
+        <br />
         <div className="form-group">
-          <label>Content</label>
+          <label className="mb-3">
+            <h5>Content</h5>
+          </label>
           <ReactQuill
             value={content}
             theme="snow"
@@ -72,7 +79,9 @@ const Form = () => {
           />
         </div>
         <div className="form-group">
-          <label>Author</label>
+          <label className="mb-3">
+            <h5>Author</h5>
+          </label>
           <input
             type="text"
             className="form-control"

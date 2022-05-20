@@ -38,8 +38,11 @@ const Edit = (props) => {
   const showEditForm = () => {
     return (
       <form onSubmit={submitEdit}>
+        <br />
         <div className="form-group">
-          <label>Blog Name</label>
+          <label className="mb-3">
+            <h5>Blog Name</h5>
+          </label>
           <input
             type="text"
             className="form-control"
@@ -47,8 +50,11 @@ const Edit = (props) => {
             onChange={inputValue("title")}
           />
         </div>
+        <br />
         <div className="form-group">
-          <label>Content</label>
+          <label className="mb-3">
+            <h5>Content</h5>
+          </label>
           <ReactQuill
             value={content}
             theme="snow"
@@ -57,8 +63,11 @@ const Edit = (props) => {
             style={{ border: "2px solid #999", borderRadius: "10px" }}
           />
         </div>
+        <br />
         <div className="form-group">
-          <label>Author</label>
+          <label className="mb-3">
+            <h5>Author</h5>
+          </label>
           <input
             type="text"
             className="form-control"
@@ -98,6 +107,7 @@ const Edit = (props) => {
   return (
     <div className="container p-5">
       <Navbar />
+      <br />
       <h1>Edit Blog</h1>
       {showEditForm()}
     </div>

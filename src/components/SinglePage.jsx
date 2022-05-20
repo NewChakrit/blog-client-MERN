@@ -18,19 +18,14 @@ const SinglePage = (props) => {
     <div className="container p-5">
       <Navbar />
       <br />
-      {blog && (
-        <div>
-          <h1>{blog.title}</h1>
-          <p>{parse(blog.content)}</p>
-          <p className="text-muted">
-            Author :{" "}
-            <i>
-              {blog.author}, Create at :{" "}
-              {new Date(blog.createdAt).toLocaleString()}
-            </i>
-          </p>
-        </div>
-      )}
+      <h1>{blog.title}</h1>
+      {/* {blog && <p>{parse(blog.content)}</p>} */}
+      <p className="text-muted">
+        Author :{" "}
+        <i>
+          {blog.author}, Create at : {new Date(blog.createdAt).toLocaleString()}
+        </i>
+      </p>
     </div>
   );
 };
