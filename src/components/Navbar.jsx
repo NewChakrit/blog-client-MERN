@@ -14,6 +14,11 @@ const Navbar = () => {
             WRITE BLOG
           </a>
         </li>
+        <li className="nav-item pr-3 pt-3 pb-3">
+          <a href="/login" className="nav-link">
+            LOGIN
+          </a>
+        </li>
       </ul>
     </nav>
   );
