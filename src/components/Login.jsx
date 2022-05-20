@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { authenticate, getUser } from "../service/authorize";
+import { withRouter } from "react-router-dom";
 
-const Login = () => {
+const Login = (props) => {
   const [state, setState] = useState({ username: "", password: "" });
 
   const { username, password } = state;
@@ -17,7 +19,8 @@ const Login = () => {
     axios
       .post(`${process.env.REACT_APP_API}/login`, { username, password })
       .then((res) => {
-        console.log(res.data);
+        Swal.fire("Welcome!", "Login successfully.", "success");
+        authenticate(res, () => props.history.push("/create"));
       })
       .catch((err) => {
         Swal.fire({
@@ -28,6 +31,9 @@ const Login = () => {
       });
   };
 
+  useEffect(() => {
+    getUser() && props.history.push("/");
+  }, []);
   return (
     <div className="container p-5">
       <Navbar />
@@ -66,4 +72,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default withRouter(Login);

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import parse from "html-react-parser";
+import { getUser } from "./service/authorize";
 
 function App() {
   const [blogs, setBlogs] = useState([]);
@@ -66,19 +67,23 @@ function App() {
                   {new Date(blogs.createdAt).toLocaleString()}
                 </i>
               </p>
-              <Link
-                className="btn btn-outline-success"
-                to={`/blog/edit/${blogs.slug}`}
-              >
-                EDIT
-              </Link>{" "}
-              &nbsp;
-              <button
-                className="btn btn-outline-danger"
-                onClick={() => confirmDelete(blogs.slug)}
-              >
-                DELETE
-              </button>
+              {getUser() && (
+                <>
+                  <Link
+                    className="btn btn-outline-success"
+                    to={`/blog/edit/${blogs.slug}`}
+                  >
+                    EDIT
+                  </Link>{" "}
+                  &nbsp;
+                  <button
+                    className="btn btn-outline-danger"
+                    onClick={() => confirmDelete(blogs.slug)}
+                  >
+                    DELETE
+                  </button>
+                </>
+              )}
             </div>
           </div>
         );
