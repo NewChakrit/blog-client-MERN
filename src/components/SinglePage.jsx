@@ -5,11 +5,15 @@ import parse from "html-react-parser";
 
 const SinglePage = (props) => {
   const [blog, setBlog] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API}/blog/${props.match.params.slug}`)
       .then((res) => setBlog(res.data))
+      .then((data) => {
+        setLoading(true);
+      })
       .catch((err) => console.log(err));
     // eslint-disable-next-line
   }, []);
@@ -19,7 +23,7 @@ const SinglePage = (props) => {
       <Navbar />
       <br />
       <h1>{blog.title}</h1>
-      {/* {blog && <p>{parse(blog.content)}</p>} */}
+      {loading ? <p>{parse(blog.content)}</p> : <></>}
       <p className="text-muted">
         Author :{" "}
         <i>

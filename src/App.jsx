@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import parse from "html-react-parser";
-import { getUser } from "./service/authorize";
+import { getUser, getToken } from "./service/authorize";
 
 function App() {
   const [blogs, setBlogs] = useState([]);
@@ -36,7 +36,9 @@ function App() {
 
   const deleteBlog = (slug) => {
     axios
-      .delete(`${process.env.REACT_APP_API}/blog/${slug}`)
+      .delete(`${process.env.REACT_APP_API}/blog/${slug}`, {
+        headers: { authorization: `Bearer ${getToken()}` },
+      })
       .then((res) => {
         Swal.fire("Deleted!", res.data.message, "success");
         fetchData();
@@ -59,7 +61,7 @@ function App() {
                 <h2>{blogs.title}</h2>
               </Link>
               <br />
-              <p>{parse(blogs.content.substring(0, 180))} . . . </p>
+              <p>{parse(blogs.content.substring(0, 250))} . . . </p>
               <p className="text-muted">
                 Author :{" "}
                 <i>

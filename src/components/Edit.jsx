@@ -4,6 +4,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { getToken } from "../service/authorize";
 
 const Edit = (props) => {
   const [state, setState] = useState({
@@ -12,7 +13,7 @@ const Edit = (props) => {
     slug: "",
   });
 
-  const { title, author, slug } = state;
+  const { title, author } = state;
   const [content, setContent] = useState("");
 
   const submitContent = (e) => {
@@ -84,11 +85,15 @@ const Edit = (props) => {
   const submitEdit = (e) => {
     e.preventDefault();
     axios
-      .put(`${process.env.REACT_APP_API}/edit/${props.match.params.slug}`, {
-        title,
-        content,
-        author,
-      })
+      .put(
+        `${process.env.REACT_APP_API}/edit/${props.match.params.slug}`,
+        {
+          title,
+          content,
+          author,
+        },
+        { headers: { authorization: `Bearer ${getToken()}` } }
+      )
       .then((res) => {
         Swal.fire(
           "Congratulations!",
